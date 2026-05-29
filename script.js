@@ -1,166 +1,290 @@
-// ===============================
-// WAIT FOR PAGE TO LOAD
-// ===============================
+// INPUTS
 
-document.addEventListener("DOMContentLoaded", () => {
+const inputs = document.querySelectorAll(
+  "input, textarea"
+);
 
-    // ===============================
-    // INPUT ELEMENTS
-    // ===============================
+// LIVE UPDATE
 
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-    const skillsInput = document.getElementById("skills");
-    const educationInput = document.getElementById("education");
+inputs.forEach((input) => {
+  input.addEventListener("input", updateResume);
+});
 
-    // ===============================
-    // PREVIEW ELEMENTS
-    // ===============================
+// UPDATE RESUME
 
-    const previewName = document.getElementById("previewName");
-    const previewEmail = document.getElementById("previewEmail");
-    const previewPhone = document.getElementById("previewPhone");
-    const previewSkills = document.getElementById("previewSkills");
-    const previewEducation = document.getElementById("previewEducation");
-    const previewSummary = document.getElementById("previewSummary");
+function updateResume() {
 
-    // ===============================
-    // LIVE PREVIEW
-    // ===============================
+  // PERSONAL
 
-    nameInput.addEventListener("input", () => {
-        previewName.innerText = nameInput.value;
-    });
+  document.getElementById(
+    "previewName"
+  ).innerText =
+    document.getElementById("name").value ||
+    "Your Name";
 
-    emailInput.addEventListener("input", () => {
-        previewEmail.innerText = emailInput.value;
-    });
+  document.getElementById(
+    "previewEmail"
+  ).innerText =
+    document.getElementById("email").value ||
+    "Email";
 
-    phoneInput.addEventListener("input", () => {
-        previewPhone.innerText = phoneInput.value;
-    });
+  document.getElementById(
+    "previewPhone"
+  ).innerText =
+    document.getElementById("phone").value ||
+    "Phone";
 
-    skillsInput.addEventListener("input", () => {
-        previewSkills.innerText = skillsInput.value;
-    });
+  document.getElementById(
+    "previewLinkedin"
+  ).innerText =
+    document.getElementById("linkedin").value ||
+    "LinkedIn";
 
-    educationInput.addEventListener("input", () => {
-        previewEducation.innerText = educationInput.value;
-    });
+  document.getElementById(
+    "previewGithub"
+  ).innerText =
+    document.getElementById("github").value ||
+    "GitHub";
 
-    // ===============================
-    // AI SUMMARY FUNCTION
-    // ===============================
+  document.getElementById(
+    "previewLocation"
+  ).innerText =
+    document.getElementById("location").value ||
+    "Location";
 
-   window.generateSummary = function () {
+  // EDUCATION
 
-    const skills =
-        skillsInput.value.trim();
+  const college =
+    document.getElementById("college").value;
 
-    const education =
-        educationInput.value.trim();
+  const degree =
+    document.getElementById("degree").value;
 
-    if (skills === "" || education === "") {
+  const cgpa =
+    document.getElementById("cgpa").value;
 
-        alert("Please enter Skills and Education first.");
+  const year =
+    document.getElementById("year").value;
 
-        return;
-    }
+  document.getElementById(
+    "previewEducation"
+  ).innerText =
+    `${degree} | ${college} | CGPA: ${cgpa} | ${year}`;
 
-    // MULTIPLE AI SUMMARIES
+  // OTHER
 
-    const summaries = [
+  document.getElementById(
+    "previewSkills"
+  ).innerText =
+    document.getElementById("skills").value;
 
-        `Highly motivated and passionate student skilled in ${skills}. Currently pursuing ${education} with strong analytical thinking, communication abilities, and dedication toward continuous learning and innovation.`,
+  document.getElementById(
+    "previewExperience"
+  ).innerText =
+    document.getElementById("experience").value;
 
-        `Detail-oriented and enthusiastic learner with expertise in ${skills}. Pursuing ${education} and capable of solving complex problems through teamwork, creativity, and technical knowledge.`,
+  document.getElementById(
+    "previewProjects"
+  ).innerText =
+    document.getElementById("projects").value;
 
-        `Aspiring software professional skilled in ${skills} and currently pursuing ${education}. Strong interest in technology, software development, and building innovative solutions with practical applications.`,
+  document.getElementById(
+    "previewCertifications"
+  ).innerText =
+    document.getElementById("certifications").value;
 
-        `Self-driven and hardworking student with knowledge of ${skills}. Currently studying ${education} with a passion for modern technologies, leadership, and professional growth.`,
+  document.getElementById(
+    "previewSummary"
+  ).innerText =
+    document.getElementById("summary").value;
 
-        `Dedicated and adaptable individual skilled in ${skills}. Pursuing ${education} with excellent problem-solving skills and strong enthusiasm for learning advanced technologies and industry practices.`
+  // STRENGTH
 
+  let strength = 0;
+
+  if (document.getElementById("name").value)
+    strength += 10;
+
+  if (document.getElementById("email").value)
+    strength += 10;
+
+  if (document.getElementById("phone").value)
+    strength += 10;
+
+  if (document.getElementById("skills").value)
+    strength += 20;
+
+  if (document.getElementById("projects").value)
+    strength += 20;
+
+  if (document.getElementById("experience").value)
+    strength += 10;
+
+  if (document.getElementById("summary").value)
+    strength += 20;
+
+  document.getElementById(
+    "strengthBar"
+  ).style.width = strength + "%";
+
+  document.getElementById(
+    "strengthText"
+  ).innerText = strength + "%";
+}
+
+// AI SUMMARY
+
+function generateSummary() {
+
+  const name =
+    document.getElementById("name").value;
+
+  const skills =
+    document.getElementById("skills").value;
+
+  const degree =
+    document.getElementById("degree").value;
+
+  const summaries = [
+
+    `${name} is a highly motivated ${degree} student with strong expertise in ${skills}. Passionate about innovation, problem-solving, and building impactful solutions.`,
+
+    `Enthusiastic ${degree} graduate skilled in ${skills}. Dedicated to delivering high-quality work and continuously improving technical knowledge.`,
+
+    `${name} is a creative and detail-oriented individual with experience in ${skills}. Seeking opportunities to contribute and grow professionally.`,
+
+    `Passionate ${degree} student with knowledge of ${skills}. Strong communication and analytical skills with a focus on professional growth.`
+
+  ];
+
+  const randomSummary =
+    summaries[
+      Math.floor(
+        Math.random() * summaries.length
+      )
     ];
 
-    // RANDOM SUMMARY
+  document.getElementById(
+    "summary"
+  ).value = randomSummary;
 
-    const randomIndex =
-        Math.floor(Math.random() * summaries.length);
+  updateResume();
+}
 
-    previewSummary.innerText =
-        summaries[randomIndex];
+// PDF DOWNLOAD
 
-};
+function downloadPDF() {
 
-    // ===============================
-    // PDF DOWNLOAD FUNCTION
-    // ===============================
+  const resume =
+    document.getElementById("resume");
 
-window.downloadPDF = function () {
+  const options = {
 
-    const resume =
-        document.getElementById("resume");
+    margin: 0.5,
 
-    const options = {
+    filename: "Resume.pdf",
 
-        margin: 0.3,
+    image: {
+      type: "jpeg",
+      quality: 1,
+    },
 
-        filename: "AI_Resume.pdf",
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+    },
 
-        image: {
-            type: "jpeg",
-            quality: 1
-        },
+    jsPDF: {
+      unit: "in",
+      format: "a4",
+      orientation: "portrait",
+    },
+  };
 
-        html2canvas: {
-            scale: 3,
-            useCORS: true,
-            scrollY: 0
-        },
+  html2pdf().set(options).from(resume).save();
+}
 
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-        },
+// DARK MODE
 
-        pagebreak: {
-            mode: ['avoid-all', 'css', 'legacy']
-        }
+function toggleDarkMode() {
 
+  document.body.classList.toggle("dark");
+}
+
+// TEMPLATE CHANGE
+
+function changeTemplate(type) {
+
+  const resume =
+    document.getElementById("resume");
+
+  // MODERN
+
+  if (type === "modern") {
+
+    resume.style.background =
+      "white";
+
+    resume.style.color =
+      "black";
+
+    resume.style.borderTop =
+      "10px solid #2563eb";
+  }
+
+  // CORPORATE
+
+  else if (type === "corporate") {
+
+    resume.style.background =
+      "#f3f4f6";
+
+    resume.style.color =
+      "#111827";
+
+    resume.style.borderTop =
+      "10px solid #111827";
+  }
+
+  // CREATIVE
+
+  else if (type === "creative") {
+
+    resume.style.background =
+      "linear-gradient(to bottom right, #fdf2f8, #ede9fe)";
+
+    resume.style.color =
+      "#4c1d95";
+
+    resume.style.borderTop =
+      "10px solid #7c3aed";
+  }
+}
+
+// IMAGE UPLOAD
+
+document
+  .getElementById("imageUpload")
+  .addEventListener("change", function(event) {
+
+    const file =
+      event.target.files[0];
+
+    const reader =
+      new FileReader();
+
+    reader.onload = function() {
+
+      document.getElementById(
+        "previewImage"
+      ).src = reader.result;
     };
 
-    html2pdf()
-        .set(options)
-        .from(resume)
-        .save();
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  });
 
-};
+// INITIAL UPDATE
 
-    // ===============================
-    // BLUE TEMPLATE
-    // ===============================
-
-    window.templateBlue = function () {
-
-        const resume = document.getElementById("resume");
-
-        resume.style.background = "#dbeafe";
-        resume.style.color = "black";
-    };
-
-    // ===============================
-    // DARK TEMPLATE
-    // ===============================
-
-    window.templateDark = function () {
-
-        const resume = document.getElementById("resume");
-
-        resume.style.background = "#1f2937";
-        resume.style.color = "white";
-    };
-
-});
+updateResume();
