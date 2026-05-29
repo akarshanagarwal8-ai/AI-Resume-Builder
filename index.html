@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>AI Resume Builder</title>
+
+<!-- Tailwind CSS -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Font Awesome -->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- html2pdf -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+```
+
+</head>
+
+<body class="bg-gradient-to-r from-blue-100 to-purple-100 min-h-screen p-6">
+
+```
+<!-- TITLE -->
+
+<div class="text-center mb-10">
+
+    <h1 class="text-5xl font-extrabold text-blue-700">
+
+        AI Resume Builder
+
+    </h1>
+
+    <p class="text-gray-700 text-lg mt-3">
+
+        Build Professional Resumes with AI Assistance
+
+    </p>
+
+</div>
+
+<!-- MAIN GRID -->
+
+<div class="grid lg:grid-cols-2 gap-8">
+
+    <!-- LEFT SIDE FORM -->
+
+    <div class="bg-white p-8 rounded-3xl shadow-2xl">
+
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+
+            Enter Your Details
+
+        </h2>
+
+        <!-- NAME -->
+
+        <div class="mb-5">
+
+            <label class="font-semibold text-gray-700">
+
+                Full Name
+
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Enter your full name"
+                class="w-full border border-gray-300 p-3 rounded-xl mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="mb-5">
+
+            <label class="font-semibold text-gray-700">
+
+                Email
+
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                class="w-full border border-gray-300 p-3 rounded-xl mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+        <!-- PHONE -->
+
+        <div class="mb-5">
+
+            <label class="font-semibold text-gray-700">
+
+                Phone
+
+            </label>
+
+            <input
+                id="phone"
+                type="text"
+                placeholder="Enter phone number"
+                class="w-full border border-gray-300 p-3 rounded-xl mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+        <!-- SKILLS -->
+
+        <div class="mb-5">
+
+            <label class="font-semibold text-gray-700">
+
+                Skills
+
+            </label>
+
+            <textarea
+                id="skills"
+                rows="4"
+                placeholder="Java, Python, SQL, Machine Learning"
+                class="w-full border border-gray-300 p-3 rounded-xl mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></textarea>
+
+        </div>
+
+        <!-- EDUCATION -->
+
+        <div class="mb-5">
+
+            <label class="font-semibold text-gray-700">
+
+                Education
+
+            </label>
+
+            <textarea
+                id="education"
+                rows="3"
+                placeholder="B.Tech CSE - Manipal University Jaipur"
+                class="w-full border border-gray-300 p-3 rounded-xl mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></textarea>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="flex flex-wrap gap-4 mt-6">
+
+            <!-- AI SUMMARY -->
+
+            <button
+                type="button"
+                onclick="generateSummary()"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition duration-300"
+            >
+
+                Generate AI Summary
+
+            </button>
+
+            <!-- DOWNLOAD PDF -->
+
+            <button
+                type="button"
+                onclick="downloadPDF()"
+                class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl transition duration-300"
+            >
+
+                Download PDF
+
+            </button>
+
+        </div>
+
+        <!-- TEMPLATE BUTTONS -->
+
+        <div class="flex flex-wrap gap-4 mt-6">
+
+            <button
+                type="button"
+                onclick="templateBlue()"
+                class="bg-blue-400 hover:bg-blue-500 text-white px-5 py-2 rounded-xl"
+            >
+
+                Blue Theme
+
+            </button>
+
+            <button
+                type="button"
+                onclick="templateDark()"
+                class="bg-gray-800 hover:bg-black text-white px-5 py-2 rounded-xl"
+            >
+
+                Dark Theme
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE RESUME -->
+
+   <div
+    id="resume"
+    class="bg-white p-10 rounded-3xl shadow-2xl transition duration-300 w-full overflow-hidden"
+>
+
+        <!-- NAME -->
+
+        <h1
+            id="previewName"
+            class="text-5xl font-bold text-blue-700"
+        >
+
+            Your Name
+
+        </h1>
+
+        <!-- CONTACT -->
+
+        <div class="mt-4 space-y-2 text-gray-700">
+
+            <p id="previewEmail">
+
+                your@email.com
+
+            </p>
+
+            <p id="previewPhone">
+
+                +91 XXXXX XXXXX
+
+            </p>
+
+        </div>
+
+        <hr class="my-6">
+
+        <!-- SUMMARY -->
+
+        <div class="mb-6">
+
+            <h2 class="text-2xl font-bold mb-2">
+
+                Professional Summary
+
+            </h2>
+
+            <p id="previewSummary">
+
+                Your AI-generated summary will appear here.
+
+            </p>
+
+        </div>
+
+        <!-- SKILLS -->
+
+        <div class="mb-6">
+
+            <h2 class="text-2xl font-bold mb-2">
+
+                Skills
+
+            </h2>
+
+            <p id="previewSkills">
+
+                Skills will appear here.
+
+            </p>
+
+        </div>
+
+        <!-- EDUCATION -->
+
+        <div>
+
+            <h2 class="text-2xl font-bold mb-2">
+
+                Education
+
+            </h2>
+
+            <p id="previewEducation">
+
+                Education details will appear here.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+```
+
+</body>
+
+</html>
