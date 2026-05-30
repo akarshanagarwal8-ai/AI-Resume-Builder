@@ -1,14 +1,10 @@
 // =====================================
-// ELEMENTS
+// INPUTS
 // =====================================
 
 const inputs = document.querySelectorAll(
   "input, textarea"
 );
-
-// =====================================
-// LIVE PREVIEW
-// =====================================
 
 inputs.forEach((input) => {
   input.addEventListener(
@@ -18,212 +14,232 @@ inputs.forEach((input) => {
 });
 
 // =====================================
-// UPDATE RESUME
+// UPDATE RESUME LIVE
 // =====================================
 
 function updateResume() {
 
-  // PERSONAL
+  setText(
+    "previewName",
+    "name",
+    "Your Name"
+  );
 
-  document.getElementById(
-    "previewName"
-  ).innerText =
-    document.getElementById("name").value ||
-    "Your Name";
+  setText(
+    "previewEmail",
+    "email",
+    "Email Address"
+  );
 
-  document.getElementById(
-    "previewEmail"
-  ).innerText =
-    document.getElementById("email").value ||
-    "Email Address";
+  setText(
+    "previewPhone",
+    "phone",
+    "Phone Number"
+  );
 
-  document.getElementById(
-    "previewPhone"
-  ).innerText =
-    document.getElementById("phone").value ||
-    "Phone Number";
+  setText(
+    "previewLinkedin",
+    "linkedin",
+    "LinkedIn Profile"
+  );
 
-  document.getElementById(
-    "previewLinkedin"
-  ).innerText =
-    document.getElementById("linkedin").value ||
-    "LinkedIn Profile";
+  setText(
+    "previewGithub",
+    "github",
+    "GitHub Profile"
+  );
 
-  document.getElementById(
-    "previewGithub"
-  ).innerText =
-    document.getElementById("github").value ||
-    "GitHub Profile";
+  setText(
+    "previewLocation",
+    "location",
+    "Location"
+  );
 
-  document.getElementById(
-    "previewLocation"
-  ).innerText =
-    document.getElementById("location").value ||
-    "Location";
+  setText(
+    "previewSummary",
+    "summary",
+    "Professional Summary"
+  );
 
-  // =====================================
-  // EDUCATION
-  // =====================================
+  setText(
+    "previewSkills",
+    "skills",
+    "Skills"
+  );
 
-  const college =
-    document.getElementById("college").value;
+  setText(
+    "previewExperience",
+    "experience",
+    "Experience"
+  );
 
-  const degree =
-    document.getElementById("degree").value;
+  setText(
+    "previewProjects",
+    "projects",
+    "Projects"
+  );
 
-  const cgpa =
-    document.getElementById("cgpa").value;
+  setText(
+    "previewCertifications",
+    "certifications",
+    "Certifications"
+  );
 
-  const year =
-    document.getElementById("year").value;
+  setText(
+    "previewAchievements",
+    "achievements",
+    "Achievements"
+  );
 
-  document.getElementById(
-    "previewEducation"
-  ).innerText =
-    `${degree} | ${college} | CGPA: ${cgpa} | ${year}`;
+  setText(
+    "previewLanguages",
+    "languages",
+    "Languages"
+  );
 
-  // =====================================
-  // SUMMARY
-  // =====================================
+  setText(
+    "previewInterests",
+    "interests",
+    "Interests"
+  );
 
-  document.getElementById(
-    "previewSummary"
-  ).innerText =
-    document.getElementById("summary").value ||
-    "Professional Summary";
-
-  // =====================================
-  // SKILLS
-  // =====================================
-
-  document.getElementById(
-    "previewSkills"
-  ).innerText =
-    document.getElementById("skills").value ||
-    "Skills";
-
-  // =====================================
-  // EXPERIENCE
-  // =====================================
-
-  document.getElementById(
-    "previewExperience"
-  ).innerText =
-    document.getElementById("experience").value ||
-    "Experience";
-
-  // =====================================
-  // PROJECTS
-  // =====================================
-
-  document.getElementById(
-    "previewProjects"
-  ).innerText =
-    document.getElementById("projects").value ||
-    "Projects";
-
-  // =====================================
-  // CERTIFICATIONS
-  // =====================================
-
-  document.getElementById(
-    "previewCertifications"
-  ).innerText =
-    document.getElementById("certifications").value ||
-    "Certifications";
-
-  // =====================================
-  // ACHIEVEMENTS
-  // =====================================
-
-  document.getElementById(
-    "previewAchievements"
-  ).innerText =
-    document.getElementById("achievements").value ||
-    "Achievements";
-
-  // =====================================
-  // LANGUAGES
-  // =====================================
-
-  document.getElementById(
-    "previewLanguages"
-  ).innerText =
-    document.getElementById("languages").value ||
-    "Languages";
-
-  // =====================================
-  // INTERESTS
-  // =====================================
-
-  document.getElementById(
-    "previewInterests"
-  ).innerText =
-    document.getElementById("interests").value ||
-    "Interests";
-
-  // =====================================
-  // ATS SCORE
-  // =====================================
+  updateEducation();
 
   calculateATS();
+
+  saveAutomatically();
 }
 
 // =====================================
-// ATS SCORE CALCULATION
+// HELPER
+// =====================================
+
+function setText(
+  previewId,
+  inputId,
+  defaultText
+) {
+
+  const preview =
+    document.getElementById(
+      previewId
+    );
+
+  const input =
+    document.getElementById(
+      inputId
+    );
+
+  if (!preview || !input) return;
+
+  preview.innerText =
+    input.value || defaultText;
+}
+
+// =====================================
+// EDUCATION
+// =====================================
+
+function updateEducation() {
+
+  const college =
+    document.getElementById(
+      "college"
+    )?.value || "";
+
+  const degree =
+    document.getElementById(
+      "degree"
+    )?.value || "";
+
+  const cgpa =
+    document.getElementById(
+      "cgpa"
+    )?.value || "";
+
+  const year =
+    document.getElementById(
+      "year"
+    )?.value || "";
+
+  const educationText =
+
+`${degree}
+${college}
+CGPA: ${cgpa}
+Passing Year: ${year}`;
+
+  const preview =
+    document.getElementById(
+      "previewEducation"
+    );
+
+  if (preview)
+    preview.innerText =
+      educationText;
+}
+
+// =====================================
+// ATS SCORE
 // =====================================
 
 function calculateATS() {
 
   let score = 0;
 
-  if (
-    document.getElementById("name").value
-  ) score += 10;
+  const fields = [
 
-  if (
-    document.getElementById("email").value
-  ) score += 10;
+    "name",
+    "email",
+    "phone",
+    "summary",
+    "skills",
+    "experience",
+    "projects",
+    "certifications",
+    "achievements",
+    "languages"
 
-  if (
-    document.getElementById("phone").value
-  ) score += 10;
+  ];
 
-  if (
-    document.getElementById("summary").value
-  ) score += 15;
+  fields.forEach((field) => {
 
-  if (
-    document.getElementById("skills").value
-  ) score += 15;
+    const value =
+      document.getElementById(
+        field
+      )?.value;
 
-  if (
-    document.getElementById("experience").value
-  ) score += 10;
+    if (
+      value &&
+      value.trim() !== ""
+    ) {
 
-  if (
-    document.getElementById("projects").value
-  ) score += 15;
+      score += 10;
 
-  if (
-    document.getElementById("certifications").value
-  ) score += 5;
+    }
 
-  if (
-    document.getElementById("achievements").value
-  ) score += 5;
+  });
 
-  if (
-    document.getElementById("languages").value
-  ) score += 5;
+  if (score > 100)
+    score = 100;
 
-  document.getElementById(
-    "strengthBar"
-  ).style.width = score + "%";
+  const bar =
+    document.getElementById(
+      "strengthBar"
+    );
 
-  document.getElementById(
-    "strengthText"
-  ).innerText = score + "%";
+  const text =
+    document.getElementById(
+      "strengthText"
+    );
+
+  if (bar)
+    bar.style.width =
+      score + "%";
+
+  if (text)
+    text.innerText =
+      score + "%";
 }
 
 // =====================================
@@ -231,835 +247,480 @@ function calculateATS() {
 // =====================================
 
 const imageUpload =
-  document.getElementById(
-    "imageUpload"
-  );
+document.getElementById(
+  "imageUpload"
+);
 
 if (imageUpload) {
 
-  imageUpload.addEventListener(
-    "change",
-    function (event) {
+imageUpload.addEventListener(
+"change",
+function(event){
 
-      const file =
-        event.target.files[0];
+const file =
+event.target.files[0];
 
-      if (!file) return;
+if(!file) return;
 
-      const reader =
-        new FileReader();
+const reader =
+new FileReader();
 
-      reader.onload =
-        function () {
+reader.onload =
+function(){
 
-          document.getElementById(
-            "previewImage"
-          ).src = reader.result;
-        };
+const image =
+document.getElementById(
+"previewImage"
+);
 
-      reader.readAsDataURL(file);
-    }
-  );
+if(image){
+
+image.src =
+reader.result;
+
+}
+
+};
+
+reader.readAsDataURL(
+file
+);
+
+}
+);
+
 }
 
 // =====================================
-// DARK MODE
+// AI SUMMARY
 // =====================================
 
-function toggleDarkMode() {
+function generateSummary() {
 
-  document.body.classList.toggle(
-    "dark"
-  );
+const name =
+document.getElementById(
+"name"
+)?.value || "";
+
+const degree =
+document.getElementById(
+"degree"
+)?.value || "";
+
+const skills =
+document.getElementById(
+"skills"
+)?.value || "";
+
+const summaries = [
+
+`${name} is a highly motivated ${degree} student with expertise in ${skills}. Passionate about building impactful software solutions and continuously improving technical skills.`,
+
+`${name} is a results-driven ${degree} student skilled in ${skills}. Strong problem-solving ability with hands-on project experience and leadership qualities.`,
+
+`${name} is an enthusiastic technology professional with knowledge of ${skills}. Dedicated to innovation, teamwork, and delivering high-quality solutions.`,
+
+`${name} combines academic excellence in ${degree} with practical experience in ${skills}. Seeking opportunities to contribute to real-world projects.`
+
+];
+
+const randomSummary =
+
+summaries[
+Math.floor(
+Math.random() *
+summaries.length
+)
+];
+
+document.getElementById(
+"summary"
+).value =
+randomSummary;
+
+updateResume();
+
 }
 
-// =====================================
-// SCROLL TO BUILDER
-// =====================================
-
-function scrollToBuilder() {
-
-  const builder =
-    document.getElementById(
-      "builderSection"
-    );
-
-  if (builder) {
-
-    builder.scrollIntoView({
-      behavior: "smooth"
-    });
-
-  }
-}
 // =====================================
 // PDF DOWNLOAD
 // =====================================
 
 function downloadPDF() {
 
-  const resume =
-    document.getElementById("resume");
-
-  const options = {
-
-    margin: 0.2,
-
-    filename:
-      "Akarshan_Resume.pdf",
-
-    image: {
-      type: "jpeg",
-      quality: 1
-    },
-
-    html2canvas: {
-      scale: 3,
-      useCORS: true,
-      scrollY: 0
-    },
-
-    jsPDF: {
-      unit: "in",
-      format: "a4",
-      orientation: "portrait"
-    },
-
-    pagebreak: {
-      mode: [
-        "avoid-all",
-        "css",
-        "legacy"
-      ]
-    }
-
-  };
-
-  html2pdf()
-    .set(options)
-    .from(resume)
-    .save();
-}
-
-// =====================================
-// TEMPLATE SYSTEM
-// =====================================
-
-function changeTemplate(type) {
-
-  const resume =
-    document.getElementById(
-      "resume"
-    );
-
-  resume.classList.remove(
-    "template-modern",
-    "template-corporate",
-    "template-creative",
-    "template-minimal",
-    "template-executive"
-  );
-
-  if (type === "modern") {
-
-    resume.classList.add(
-      "template-modern"
-    );
-
-  }
-
-  else if (
-    type === "corporate"
-  ) {
-
-    resume.classList.add(
-      "template-corporate"
-    );
-
-  }
-
-  else if (
-    type === "creative"
-  ) {
-
-    resume.classList.add(
-      "template-creative"
-    );
-
-  }
-
-  else if (
-    type === "minimal"
-  ) {
-
-    resume.classList.add(
-      "template-minimal"
-    );
-
-  }
-
-  else if (
-    type === "executive"
-  ) {
-
-    resume.classList.add(
-      "template-executive"
-    );
-
-  }
-
-}
-
-// =====================================
-// PROFESSIONAL AI SUMMARY
-// =====================================
-
-function generateSummary() {
-
-  const name =
-    document.getElementById(
-      "name"
-    ).value;
-
-  const degree =
-    document.getElementById(
-      "degree"
-    ).value;
-
-  const skills =
-    document.getElementById(
-      "skills"
-    ).value;
-
-  const project =
-    document.getElementById(
-      "projects"
-    ).value;
-
-  const summaries = [
-
-`${name} is a highly motivated ${degree} student with expertise in ${skills}. Passionate about software development, innovation, and solving real-world problems through technology. Demonstrates strong analytical skills, teamwork, and a commitment to continuous learning.`,
-
-`${name} is a results-driven ${degree} student skilled in ${skills}. Experienced in developing practical projects including ${project}. Seeking opportunities to apply technical expertise while contributing to organizational growth.`,
-
-`${name} is an enthusiastic technology professional with strong knowledge of ${skills}. Possesses problem-solving abilities, leadership qualities, and hands-on project experience. Dedicated to building scalable and impactful software solutions.`,
-
-`${name} combines academic excellence in ${degree} with practical experience in ${skills}. Demonstrates creativity, adaptability, and a strong passion for emerging technologies and innovation.`,
-
-`${name} is a detail-oriented and ambitious candidate with expertise in ${skills}. Proven ability to work effectively on technical projects and collaborate with teams to deliver high-quality solutions.`
-
-  ];
-
-  const randomSummary =
-
-    summaries[
-      Math.floor(
-        Math.random() *
-        summaries.length
-      )
-    ];
-
-  document.getElementById(
-    "summary"
-  ).value = randomSummary;
-
-  updateResume();
-}
-function generateCoverLetter() {
-
-const name =
-document.getElementById("name").value;
-
-const degree =
-document.getElementById("degree").value;
-
-const skills =
-document.getElementById("skills").value;
-
-const letter =
-
-`Dear Hiring Manager,
-
-I am writing to express my interest in opportunities that align with my academic background in ${degree}.
-
-My expertise includes ${skills}. I am passionate about solving problems, learning new technologies, and contributing effectively to organizational success.
-
-I would welcome the opportunity to discuss how my skills and enthusiasm can benefit your team.
-
-Sincerely,
-${name}`;
-
+const resume =
 document.getElementById(
-"coverLetter"
-).value = letter;
+"resume"
+);
+
+if(!resume) return;
+
+const options = {
+
+margin:0.2,
+
+filename:
+"Akarshan_Resume.pdf",
+
+image:{
+type:"jpeg",
+quality:1
+},
+
+html2canvas:{
+scale:3
+},
+
+jsPDF:{
+unit:"in",
+format:"a4",
+orientation:"portrait"
+}
+
+};
+
+html2pdf()
+.set(options)
+.from(resume)
+.save();
 
 }
 
-function analyzeKeywords() {
+// =====================================
+// DARK MODE
+// =====================================
 
-const skills =
-document.getElementById(
-"skills"
-).value.toLowerCase();
+function toggleDarkMode(){
 
-const jd =
-document.getElementById(
-"jobDescription"
-).value.toLowerCase();
-
-let score = 0;
-
-const keywords = [
-
-"java",
-"python",
-"sql",
-"javascript",
-"react",
-"machine learning",
-"html",
-"css",
-"git"
-
-];
-
-keywords.forEach((word)=>{
-
-if(
-skills.includes(word)
-&&
-jd.includes(word)
-){
-
-score += 10;
-
-}
-
-});
-
-alert(
-"ATS Keyword Match: "
-+
-score
-+
-"%"
+document.body.classList.toggle(
+"dark"
 );
 
 }
 
 // =====================================
-// GEMINI AI API FUNCTION
+// TEMPLATE SWITCHER
 // =====================================
 
-async function generateRealAISummary() {
+function changeTemplate(type){
 
-  const name =
-    document.getElementById(
-      "name"
-    ).value;
+const resume =
+document.getElementById(
+"resume"
+);
 
-  const degree =
-    document.getElementById(
-      "degree"
-    ).value;
+if(!resume) return;
 
-  const skills =
-    document.getElementById(
-      "skills"
-    ).value;
+resume.style.borderTop =
+"10px solid #2563eb";
 
-  const projects =
-    document.getElementById(
-      "projects"
-    ).value;
+if(type==="modern"){
 
-  const prompt =
+resume.style.background =
+"white";
 
-`Generate a professional ATS-friendly resume summary.
+resume.style.color =
+"#111827";
 
-Name: ${name}
+}
 
-Degree: ${degree}
+if(type==="corporate"){
 
-Skills: ${skills}
+resume.style.background =
+"#f3f4f6";
 
-Projects: ${projects}
+resume.style.color =
+"#111827";
 
-Write in 4-5 professional lines.`;
+resume.style.borderTop =
+"10px solid #111827";
 
-  try {
+}
 
-    const response =
-      await fetch(
-        "YOUR_BACKEND_ENDPOINT",
-        {
-          method: "POST",
+if(type==="creative"){
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+resume.style.background =
+"linear-gradient(to bottom right,#f3e8ff,#ffffff)";
 
-          body: JSON.stringify({
-            prompt
-          })
-        }
-      );
+resume.style.color =
+"#4c1d95";
 
-    const data =
-      await response.json();
+resume.style.borderTop =
+"10px solid #7c3aed";
 
-    document.getElementById(
-      "summary"
-    ).value =
-      data.text;
-
-    updateResume();
-
-  }
-
-  catch (error) {
-
-    console.log(error);
-
-    alert(
-      "AI Summary Error"
-    );
-
-  }
+}
 
 }
 
 // =====================================
-// SAVE RESUME
+// SAVE DATA
 // =====================================
 
-function saveResume() {
+function saveAutomatically(){
 
-  const data = {
+const data = {
 
-    name:
-      document.getElementById(
-        "name"
-      ).value,
+name:
+document.getElementById("name")?.value || "",
 
-    email:
-      document.getElementById(
-        "email"
-      ).value,
+email:
+document.getElementById("email")?.value || "",
 
-    phone:
-      document.getElementById(
-        "phone"
-      ).value,
+phone:
+document.getElementById("phone")?.value || "",
 
-    skills:
-      document.getElementById(
-        "skills"
-      ).value,
+linkedin:
+document.getElementById("linkedin")?.value || "",
 
-    summary:
-      document.getElementById(
-        "summary"
-      ).value
+github:
+document.getElementById("github")?.value || "",
 
-  };
+location:
+document.getElementById("location")?.value || "",
 
-  localStorage.setItem(
-    "resumeData",
-    JSON.stringify(data)
-  );
+college:
+document.getElementById("college")?.value || "",
 
-  alert(
-    "Resume Saved"
-  );
+degree:
+document.getElementById("degree")?.value || "",
+
+cgpa:
+document.getElementById("cgpa")?.value || "",
+
+year:
+document.getElementById("year")?.value || "",
+
+summary:
+document.getElementById("summary")?.value || "",
+
+skills:
+document.getElementById("skills")?.value || "",
+
+experience:
+document.getElementById("experience")?.value || "",
+
+projects:
+document.getElementById("projects")?.value || "",
+
+certifications:
+document.getElementById("certifications")?.value || "",
+
+achievements:
+document.getElementById("achievements")?.value || "",
+
+languages:
+document.getElementById("languages")?.value || "",
+
+interests:
+document.getElementById("interests")?.value || ""
+
+};
+
+localStorage.setItem(
+"resumeData",
+JSON.stringify(data)
+);
 
 }
 
 // =====================================
-// LOAD RESUME
+// LOAD DATA
 // =====================================
 
-function loadResume() {
+function loadResume(){
 
-  const data = JSON.parse(
-    localStorage.getItem(
-      "resumeData"
-    )
-  );
+const data =
+JSON.parse(
+localStorage.getItem(
+"resumeData"
+)
+);
 
-  if (!data) return;
+if(!data) return;
 
-  document.getElementById(
-    "name"
-  ).value = data.name || "";
+Object.keys(data).forEach(
+(key)=>{
 
-  document.getElementById(
-    "email"
-  ).value = data.email || "";
+const field =
+document.getElementById(
+key
+);
 
-  document.getElementById(
-    "phone"
-  ).value = data.phone || "";
+if(field){
 
-  document.getElementById(
-    "skills"
-  ).value = data.skills || "";
+field.value =
+data[key];
 
-  document.getElementById(
-    "summary"
-  ).value = data.summary || "";
-
-  updateResume();
 }
-// =====================================
-// CHATBOT OPEN/CLOSE
-// =====================================
 
-function toggleChatbot() {
+}
+);
 
-  const chatbot =
-    document.getElementById(
-      "chatbotContainer"
-    );
+updateResume();
 
-  chatbot.classList.toggle(
-    "hidden"
-  );
 }
 
 // =====================================
-// CHATBOT RESPONSES
+// CHATBOT
 // =====================================
 
-async function sendMessage() {
+function toggleChatbot(){
 
-  const input =
-    document.getElementById(
-      "chatInput"
-    );
+const chatbot =
+document.getElementById(
+"chatbotContainer"
+);
 
-  const message =
-    input.value.trim();
+if(chatbot){
 
-  if (!message) return;
+chatbot.classList.toggle(
+"hidden"
+);
 
-  const chatBox =
-    document.getElementById(
-      "chatMessages"
-    );
+}
 
-  // USER MESSAGE
+}
 
-  chatBox.innerHTML += `
+function sendMessage(){
 
-  <div
-  class="bg-blue-600 text-white p-3 rounded-xl ml-auto max-w-[80%]">
+const input =
+document.getElementById(
+"chatInput"
+);
 
-  ${message}
+if(!input) return;
 
-  </div>
+const message =
+input.value.trim();
 
-  `;
+if(message==="")
+return;
 
-  input.value = "";
+const chat =
+document.getElementById(
+"chatMessages"
+);
 
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
+chat.innerHTML += `
 
-  // BOT TYPING
+<div class="bot-message">
 
-  chatBox.innerHTML += `
+👤 ${message}
 
-  <div
-  id="typingMessage"
-  class="bg-gray-100 p-3 rounded-xl max-w-[80%]">
+</div>
 
-  Typing...
+`;
 
-  </div>
+let reply = "";
 
-  `;
+const msg =
+message.toLowerCase();
 
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
+if(msg.includes("resume")){
 
-  // SIMPLE LOCAL AI
+reply =
+"A strong resume should include Summary, Skills, Projects, Experience and Certifications.";
 
-  let response = "";
+}
+else if(msg.includes("project")){
 
-  const msg =
-    message.toLowerCase();
+reply =
+"Recommended projects: AI Resume Builder, Face Recognition System, Portfolio Website, Renewable Energy Prediction.";
 
-  if (
-    msg.includes("skill")
-  ) {
+}
+else if(msg.includes("skill")){
 
-    response =
-      "Recommended skills: Java, Python, SQL, Machine Learning, React, Git, Data Structures & Algorithms.";
+reply =
+"Recommended skills: Java, Python, SQL, Machine Learning, React, Git and DSA.";
 
-  }
+}
+else if(msg.includes("interview")){
 
-  else if (
-    msg.includes("project")
-  ) {
+reply =
+"Prepare OOPs, DBMS, SQL, DSA, Projects and HR Questions.";
 
-    response =
-      "Recommended projects: AI Resume Builder, Face Recognition Attendance System, E-Commerce Website, Renewable Energy Prediction System.";
+}
+else{
 
-  }
+reply =
+"I can help with Resume Building, ATS Optimization, Projects and Career Guidance.";
 
-  else if (
-    msg.includes("resume")
-  ) {
+}
 
-    response =
-      "A strong resume should contain Summary, Education, Skills, Projects, Experience, Certifications and Achievements.";
+setTimeout(()=>{
 
-  }
+chat.innerHTML += `
 
-  else if (
-    msg.includes("ats")
-  ) {
+<div class="bot-message">
 
-    response =
-      "Improve ATS score by adding measurable achievements, relevant skills, internships, certifications and project details.";
+🤖 ${reply}
 
-  }
+</div>
 
-  else if (
-    msg.includes("interview")
-  ) {
+`;
 
-    response =
-      "Prepare Introduction, Projects, OOPs, DBMS, SQL, DSA, HR Questions and Internship Experience.";
+chat.scrollTop =
+chat.scrollHeight;
 
-  }
+},500);
 
-  else {
+input.value="";
 
-    response =
-      "I can help with Resume Writing, ATS Optimization, Career Guidance, Projects and Interview Preparation.";
-
-  }
-
-  // REMOVE TYPING
-
-  setTimeout(() => {
-
-    const typing =
-      document.getElementById(
-        "typingMessage"
-      );
-
-    if (typing)
-      typing.remove();
-
-    chatBox.innerHTML += `
-
-    <div
-    class="bg-gray-100 p-3 rounded-xl max-w-[80%]">
-
-    ${response}
-
-    </div>
-
-    `;
-
-    chatBox.scrollTop =
-      chatBox.scrollHeight;
-
-  }, 1000);
 }
 
 // =====================================
-// ENTER KEY SUPPORT
+// ENTER SUPPORT
 // =====================================
 
 document.addEventListener(
-  "keydown",
-  function(event) {
+"keydown",
+function(e){
 
-    if (
-      event.key === "Enter"
-    ) {
+if(
+e.key==="Enter" &&
+document.activeElement.id==="chatInput"
+){
 
-      const active =
-        document.activeElement;
+sendMessage();
 
-      if (
-        active &&
-        active.id === "chatInput"
-      ) {
+}
 
-        sendMessage();
-
-      }
-
-    }
-
-  }
+}
 );
 
 // =====================================
-// AUTO SAVE
+// SCROLL BUTTON
 // =====================================
 
-setInterval(() => {
+function scrollToBuilder(){
 
-  const data = {
+const section =
+document.getElementById(
+"builderSection"
+);
 
-    name:
-      document.getElementById(
-        "name"
-      )?.value || "",
+if(section){
 
-    email:
-      document.getElementById(
-        "email"
-      )?.value || "",
+section.scrollIntoView({
+behavior:"smooth"
+});
 
-    phone:
-      document.getElementById(
-        "phone"
-      )?.value || "",
+}
 
-    linkedin:
-      document.getElementById(
-        "linkedin"
-      )?.value || "",
-
-    github:
-      document.getElementById(
-        "github"
-      )?.value || "",
-
-    location:
-      document.getElementById(
-        "location"
-      )?.value || "",
-
-    college:
-      document.getElementById(
-        "college"
-      )?.value || "",
-
-    degree:
-      document.getElementById(
-        "degree"
-      )?.value || "",
-
-    cgpa:
-      document.getElementById(
-        "cgpa"
-      )?.value || "",
-
-    year:
-      document.getElementById(
-        "year"
-      )?.value || "",
-
-    skills:
-      document.getElementById(
-        "skills"
-      )?.value || "",
-
-    experience:
-      document.getElementById(
-        "experience"
-      )?.value || "",
-
-    projects:
-      document.getElementById(
-        "projects"
-      )?.value || "",
-
-    certifications:
-      document.getElementById(
-        "certifications"
-      )?.value || "",
-
-    achievements:
-      document.getElementById(
-        "achievements"
-      )?.value || "",
-
-    languages:
-      document.getElementById(
-        "languages"
-      )?.value || "",
-
-    interests:
-      document.getElementById(
-        "interests"
-      )?.value || "",
-
-    summary:
-      document.getElementById(
-        "summary"
-      )?.value || ""
-
-  };
-
-  localStorage.setItem(
-    "fullResumeData",
-    JSON.stringify(data)
-  );
-
-}, 5000);
-
-// =====================================
-// LOAD ALL DATA
-// =====================================
-
-function loadAllData() {
-
-  const data =
-    JSON.parse(
-      localStorage.getItem(
-        "fullResumeData"
-      )
-    );
-
-  if (!data) return;
-
-  Object.keys(data).forEach(
-    (key) => {
-
-      const field =
-        document.getElementById(
-          key
-        );
-
-      if (field) {
-
-        field.value =
-          data[key];
-
-      }
-
-    }
-  );
-
-  updateResume();
 }
 
 // =====================================
-// INITIALIZATION
+// START
 // =====================================
 
-window.onload = () => {
+window.onload = function(){
 
-  loadAllData();
+loadResume();
 
-  updateResume();
+updateResume();
 
-  changeTemplate(
-    "modern"
-  );
-
-  console.log(
-    "AI Resume Builder Loaded Successfully"
-  );
+console.log(
+"AI Resume Builder Loaded"
+);
 
 };
