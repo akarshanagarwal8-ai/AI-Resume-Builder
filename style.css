@@ -1,85 +1,337 @@
-body {
-  font-family: Arial, sans-serif;
+/* ==========================
+   GLOBAL
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
 }
 
-/* INPUT */
-.input {
-  width: 100%;
-  border: 2px solid #d1d5db;
-  padding: 12px;
-  border-radius: 12px;
-  outline: none;
-  transition: 0.3s;
+body{
+font-family:'Segoe UI',sans-serif;
+transition:0.4s;
 }
 
-.input:focus {
-  border-color: #2563eb;
-  box-shadow: 0px 0px 10px rgba(37, 99, 235, 0.2);
+/* ==========================
+   INPUTS
+========================== */
+
+.input{
+width:100%;
+padding:14px;
+border-radius:14px;
+border:2px solid #dbeafe;
+outline:none;
+font-size:15px;
+background:white;
+transition:0.3s;
 }
 
-/* TEXTAREA */
-.textarea {
-  width: 100%;
-  border: 2px solid #d1d5db;
-  padding: 14px;
-  border-radius: 12px;
-  outline: none;
-  transition: 0.3s;
+.input:focus{
+border-color:#2563eb;
+box-shadow:0 0 15px rgba(37,99,235,.15);
 }
 
-.textarea:focus {
-  border-color: #7c3aed;
-  box-shadow: 0px 0px 10px rgba(124, 58, 237, 0.2);
+.textarea{
+width:100%;
+padding:14px;
+border-radius:14px;
+border:2px solid #e5e7eb;
+outline:none;
+resize:none;
+font-size:15px;
+transition:0.3s;
 }
 
-/* TITLES */
-.section-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: #2563eb;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #dbeafe;
-  padding-bottom: 5px;
+.textarea:focus{
+border-color:#7c3aed;
+box-shadow:0 0 15px rgba(124,58,237,.15);
 }
 
-/* DARK MODE */
-.dark {
-  background: #111827;
-  color: white;
+/* ==========================
+   TITLES
+========================== */
+
+.section-title{
+font-size:22px;
+font-weight:700;
+color:#2563eb;
+margin-bottom:12px;
+padding-bottom:8px;
+border-bottom:3px solid #dbeafe;
 }
 
-.dark .bg-white {
-  background: #1f2937 !important;
-  color: white;
+/* ==========================
+   RESUME
+========================== */
+
+#resume{
+transition:.4s;
+overflow:hidden;
+line-height:1.7;
+word-wrap:break-word;
 }
 
-.dark input,
-.dark textarea {
-  background: #374151;
-  color: white;
-  border-color: #4b5563;
+#resume p{
+color:#374151;
 }
 
-.dark p {
-  color: #e5e7eb !important;
+#resume h2{
+margin-bottom:10px;
 }
 
-.dark .section-title {
-  color: #60a5fa;
-  border-color: #374151;
+/* ==========================
+   IMAGE
+========================== */
+
+#previewImage{
+transition:.4s;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-/* ANIMATION */
-#resume {
-  transition: all 0.4s ease;
+/* ==========================
+   BUTTONS
+========================== */
+
+button{
+cursor:pointer;
+transition:.3s;
+font-weight:600;
 }
 
-button:hover {
-  transform: scale(1.05);
+button:hover{
+transform:translateY(-2px);
 }
 
-input,
-textarea,
-button {
-  transition: all 0.3s ease;
+button:active{
+transform:scale(.97);
+}
+
+/* ==========================
+   FEATURE CARDS
+========================== */
+
+#features .bg-white{
+transition:.35s;
+}
+
+#features .bg-white:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+/* ==========================
+   ATS BAR
+========================== */
+
+#strengthBar{
+transition:1s;
+background:linear-gradient(
+90deg,
+#22c55e,
+#16a34a
+);
+}
+
+#strengthText{
+font-weight:bold;
+}
+
+/* ==========================
+   CHATBOT
+========================== */
+
+#chatbotButton{
+transition:.3s;
+}
+
+#chatbotButton:hover{
+transform:scale(1.1);
+}
+
+#chatbotContainer{
+animation:popup .3s ease;
+}
+
+@keyframes popup{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+margin-top:100px;
+}
+
+/* ==========================
+   MODERN TEMPLATE
+========================== */
+
+.template-modern{
+background:white;
+color:black;
+border-top:10px solid #2563eb;
+}
+
+/* ==========================
+   CORPORATE TEMPLATE
+========================== */
+
+.template-corporate{
+background:#f3f4f6;
+color:#111827;
+border-top:10px solid #111827;
+}
+
+/* ==========================
+   CREATIVE TEMPLATE
+========================== */
+
+.template-creative{
+background:linear-gradient(
+135deg,
+#fdf2f8,
+#ede9fe
+);
+color:#4c1d95;
+border-top:10px solid #7c3aed;
+}
+
+/* ==========================
+   MINIMAL TEMPLATE
+========================== */
+
+.template-minimal{
+background:white;
+color:#111827;
+border-top:10px solid #16a34a;
+}
+
+/* ==========================
+   EXECUTIVE TEMPLATE
+========================== */
+
+.template-executive{
+background:#111827;
+color:white;
+border-top:10px solid gold;
+}
+
+.template-executive p{
+color:#e5e7eb !important;
+}
+
+/* ==========================
+   DARK MODE
+========================== */
+
+.dark{
+background:#111827 !important;
+color:white;
+}
+
+.dark .bg-white{
+background:#1f2937 !important;
+color:white;
+}
+
+.dark .input,
+.dark .textarea{
+background:#374151;
+color:white;
+border-color:#4b5563;
+}
+
+.dark .section-title{
+color:#60a5fa;
+border-color:#374151;
+}
+
+.dark p{
+color:#e5e7eb !important;
+}
+
+.dark footer{
+background:black;
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-track{
+background:#e5e7eb;
+}
+
+::-webkit-scrollbar-thumb{
+background:#2563eb;
+border-radius:20px;
+}
+
+/* ==========================
+   HERO
+========================== */
+
+section h1{
+letter-spacing:-1px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1024px){
+
+#resume{
+margin-top:20px;
+}
+
+}
+
+@media(max-width:768px){
+
+section h1{
+font-size:42px !important;
+}
+
+#chatbotContainer{
+width:92%;
+right:4%;
+}
+
+}
+
+@media(max-width:500px){
+
+section h1{
+font-size:32px !important;
+}
+
+.section-title{
+font-size:18px;
+}
+
+.input,
+.textarea{
+font-size:14px;
+}
+
 }

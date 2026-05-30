@@ -1,470 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>AI Resume Builder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<title>AI Resume Builder | Akarshan Agarwal</title>
 
-  <!-- Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <link rel="stylesheet" href="style.css" />
+<!-- PDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
-<body class="bg-gradient-to-r from-blue-100 to-purple-100 min-h-screen p-6">
-
-  <div class="grid lg:grid-cols-2 gap-8">
-
-    <!-- LEFT SIDE -->
-    <div class="bg-white p-8 rounded-3xl shadow-2xl">
-
-      <h1 class="text-4xl font-bold text-blue-700 mb-2">
-        AI Resume Builder
-      </h1>
-
-      <p class="text-gray-500 mb-8">
-        Create a professional resume instantly
-      </p>
-
-      <!-- PERSONAL INFO -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Personal Information
-        </h2>
-
-        <div class="grid md:grid-cols-2 gap-4">
-
-          <input
-            type="text"
-            id="name"
-            placeholder="Full Name"
-            class="input"
-          />
-
-          <input
-            type="email"
-            id="email"
-            placeholder="Email Address"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="phone"
-            placeholder="Phone Number"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="linkedin"
-            placeholder="LinkedIn Profile"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="github"
-            placeholder="GitHub Profile"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="location"
-            placeholder="Location"
-            class="input"
-          />
-
-        </div>
-
-      </div>
-
-      <!-- EDUCATION -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Education
-        </h2>
-
-        <div class="grid md:grid-cols-2 gap-4">
-
-          <input
-            type="text"
-            id="college"
-            placeholder="College Name"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="degree"
-            placeholder="Degree"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="cgpa"
-            placeholder="CGPA"
-            class="input"
-          />
-
-          <input
-            type="text"
-            id="year"
-            placeholder="Passing Year"
-            class="input"
-          />
+<body class="bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 min-h-screen">
 
-        </div>
+<!-- NAVBAR -->
 
-      </div>
+<nav class="bg-white shadow-lg sticky top-0 z-50">
 
-      <!-- SKILLS -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Skills
-        </h2>
-
-        <textarea
-          id="skills"
-          rows="3"
-          placeholder="Java, Python, SQL, Machine Learning..."
-          class="textarea"
-        ></textarea>
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-      </div>
+<div>
 
-      <!-- EXPERIENCE -->
-      <div class="mb-8">
+<h1 class="text-2xl font-bold text-blue-700">
+AI Resume Builder
+</h1>
 
-        <h2 class="section-title">
-          Experience
-        </h2>
-
-        <textarea
-          id="experience"
-          rows="4"
-          placeholder="Internships, Freelancing, Work Experience..."
-          class="textarea"
-        ></textarea>
-
-      </div>
-
-      <!-- PROJECTS -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Projects
-        </h2>
-
-        <textarea
-          id="projects"
-          rows="4"
-          placeholder="Project Name + Description..."
-          class="textarea"
-        ></textarea>
+<p class="text-xs text-gray-500">
+Created by Akarshan Agarwal
+</p>
 
-      </div>
-
-      <!-- CERTIFICATIONS -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Certifications
-        </h2>
-
-        <textarea
-          id="certifications"
-          rows="3"
-          placeholder="Certificates & Achievements..."
-          class="textarea"
-        ></textarea>
-
-      </div>
-
-      <!-- SUMMARY -->
-      <div class="mb-8">
-
-        <div class="flex justify-between items-center mb-3">
-
-          <h2 class="section-title !mb-0">
-            Professional Summary
-          </h2>
-
-          <button
-            onclick="generateSummary()"
-            class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl shadow-lg"
-          >
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            Generate AI Summary
-          </button>
-
-        </div>
-
-        <textarea
-          id="summary"
-          rows="5"
-          placeholder="Your professional summary..."
-          class="textarea"
-        ></textarea>
+</div>
 
-      </div>
-
-      <!-- PHOTO -->
-      <div class="mb-8">
-
-        <h2 class="section-title">
-          Upload Profile Photo
-        </h2>
+<div class="flex gap-3">
 
-        <input
-          type="file"
-          id="imageUpload"
-          class="input"
-        />
+<button
+onclick="toggleDarkMode()"
+class="bg-black text-white px-4 py-2 rounded-xl">
 
-      </div>
+<i class="fa-solid fa-moon"></i>
 
-      <!-- TEMPLATES -->
-      <div class="mb-8">
+</button>
 
-        <h2 class="section-title">
-          Choose Template
-        </h2>
+<button
+onclick="scrollToBuilder()"
+class="bg-blue-600 text-white px-5 py-2 rounded-xl">
 
-        <div class="flex gap-4 flex-wrap">
-
-          <button
-            onclick="changeTemplate('modern')"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl"
-          >
-            Modern
-          </button>
-
-          <button
-            onclick="changeTemplate('corporate')"
-            class="bg-gray-700 hover:bg-gray-800 text-white px-5 py-2 rounded-xl"
-          >
-            Corporate
-          </button>
-
-          <button
-            onclick="changeTemplate('creative')"
-            class="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-xl"
-          >
-            Creative
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- BUTTONS -->
-      <div class="flex flex-wrap gap-4 mt-8">
-
-        <button
-          onclick="downloadPDF()"
-          class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-xl"
-        >
-          <i class="fa-solid fa-download"></i>
-          Download Resume PDF
-        </button>
-
-        <button
-          onclick="toggleDarkMode()"
-          class="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl shadow-xl"
-        >
-          <i class="fa-solid fa-moon"></i>
-          Toggle Dark Mode
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- RIGHT SIDE -->
-    <div
-      id="resume"
-      class="bg-white p-10 rounded-3xl shadow-2xl transition duration-300 w-full overflow-hidden"
-    >
-
-      <!-- STRENGTH -->
-      <div class="mb-8">
-
-        <div class="flex justify-between mb-2">
-
-          <span class="font-bold">
-            Resume Strength
-          </span>
-
-          <span id="strengthText">
-            20%
-          </span>
-
-        </div>
-
-        <div class="w-full bg-gray-300 rounded-full h-4">
-
-          <div
-            id="strengthBar"
-            class="bg-green-500 h-4 rounded-full"
-            style="width:20%"
-          ></div>
-
-        </div>
-
-      </div>
-
-      <!-- PROFILE -->
-      <div class="text-center mb-8">
-
-        <img
-          id="previewImage"
-          src="https://via.placeholder.com/120"
-          class="w-32 h-32 rounded-full mx-auto border-4 border-blue-500 object-cover mb-4"
-        />
+Get Started
 
-        <h1
-          id="previewName"
-          class="text-5xl font-bold text-blue-700"
-        >
-          Your Name
-        </h1>
-
-        <p
-          id="previewEmail"
-          class="text-gray-600 mt-2"
-        >
-          Email
-        </p>
+</button>
 
-        <p
-          id="previewPhone"
-          class="text-gray-600"
-        >
-          Phone
-        </p>
+</div>
 
-        <p
-          id="previewLinkedin"
-          class="text-gray-600"
-        >
-          LinkedIn
-        </p>
+</div>
 
-        <p
-          id="previewGithub"
-          class="text-gray-600"
-        >
-          GitHub
-        </p>
+</nav>
 
-        <p
-          id="previewLocation"
-          class="text-gray-600"
-        >
-          Location
-        </p>
+<!-- HERO -->
 
-      </div>
+<section
+class="relative overflow-hidden">
 
-      <!-- SUMMARY -->
-      <div class="mb-8">
+<div
+class="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 opacity-90">
+</div>
 
-        <h2 class="section-title">
-          Professional Summary
-        </h2>
+<div
+class="relative max-w-7xl mx-auto px-8 py-24 text-center text-white">
 
-        <p id="previewSummary">
-          Your professional summary...
-        </p>
+<h1
+class="text-6xl font-extrabold mb-6">
 
-      </div>
+Build Professional Resumes With AI
 
-      <!-- EDUCATION -->
-      <div class="mb-8">
+</h1>
 
-        <h2 class="section-title">
-          Education
-        </h2>
+<p
+class="text-xl max-w-3xl mx-auto mb-10">
 
-        <p id="previewEducation">
-          Education Details
-        </p>
+Create ATS-friendly resumes in minutes.
+Generate AI summaries, customize templates,
+preview instantly and export professional PDFs.
 
-      </div>
+</p>
 
-      <!-- SKILLS -->
-      <div class="mb-8">
+<div class="flex justify-center gap-4 flex-wrap">
 
-        <h2 class="section-title">
-          Skills
-        </h2>
+<button
+onclick="scrollToBuilder()"
+class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold shadow-xl">
 
-        <p id="previewSkills">
-          Skills
-        </p>
+Create Resume
 
-      </div>
+</button>
 
-      <!-- EXPERIENCE -->
-      <div class="mb-8">
+<button
+onclick="scrollToFeatures()"
+class="border-2 border-white px-8 py-4 rounded-2xl font-bold">
 
-        <h2 class="section-title">
-          Experience
-        </h2>
+Explore Features
 
-        <p id="previewExperience">
-          Experience
-        </p>
+</button>
 
-      </div>
+</div>
 
-      <!-- PROJECTS -->
-      <div class="mb-8">
+</div>
 
-        <h2 class="section-title">
-          Projects
-        </h2>
+</section>
 
-        <p id="previewProjects">
-          Projects
-        </p>
+<!-- FEATURES -->
 
-      </div>
+<section
+id="features"
+class="max-w-7xl mx-auto px-8 py-20">
 
-      <!-- CERTIFICATIONS -->
-      <div>
+<h2
+class="text-4xl font-bold text-center mb-16">
 
-        <h2 class="section-title">
-          Certifications
-        </h2>
+Powerful Features
 
-        <p id="previewCertifications">
-          Certifications
-        </p>
+</h2>
 
-      </div>
+<div
+class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-    </div>
+<div
+class="bg-white p-8 rounded-3xl shadow-xl">
 
-  </div>
+<i class="fa-solid fa-robot text-4xl text-purple-600 mb-4"></i>
 
-  <script src="script.js"></script>
+<h3 class="font-bold text-xl mb-3">
+AI Summary
+</h3>
+
+<p class="text-gray-600">
+Generate professional summaries using AI.
+</p>
+
+</div>
+
+<div
+class="bg-white p-8 rounded-3xl shadow-xl">
+
+<i class="fa-solid fa-file-pdf text-4xl text-red-500 mb-4"></i>
+
+<h3 class="font-bold text-xl mb-3">
+PDF Export
+</h3>
+
+<p class="text-gray-600">
+Download clean recruiter-ready resumes.
+</p>
+
+</div>
+
+<div
+class="bg-white p-8 rounded-3xl shadow-xl">
+
+<i class="fa-solid fa-palette text-4xl text-pink-500 mb-4"></i>
+
+<h3 class="font-bold text-xl mb-3">
+5 Templates
+</h3>
+
+<p class="text-gray-600">
+Modern, Corporate, Creative and more.
+</p>
+
+</div>
+
+<div
+class="bg-white p-8 rounded-3xl shadow-xl">
+
+<i class="fa-solid fa-chart-line text-4xl text-green-500 mb-4"></i>
+
+<h3 class="font-bold text-xl mb-3">
+ATS Score
+</h3>
+
+<p class="text-gray-600">
+Track resume strength in real time.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BUILDER -->
+
+<section
+id="builder"
+class="max-w-7xl mx-auto px-6 pb-12">
+
+<div
+class="grid lg:grid-cols-2 gap-8">
+
+<!-- LEFT PANEL -->
+
+<div
+class="bg-white p-8 rounded-3xl shadow-2xl">
+
+<h2
+class="text-4xl font-bold text-blue-700 mb-2">
+
+Resume Builder
+
+</h2>
+
+<p
+class="text-gray-500 mb-8">
+
+Fill details and watch your resume update instantly.
+
+</p>
+
+<!-- PERSONAL INFORMATION -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Personal Information
+</h3>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+class="input">
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+class="input">
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number"
+class="input">
+
+<input
+type="text"
+id="location"
+placeholder="Location"
+class="input">
+
+<input
+type="text"
+id="linkedin"
+placeholder="LinkedIn Profile"
+class="input">
+
+<input
+type="text"
+id="github"
+placeholder="GitHub Profile"
+class="input">
+
+</div>
+
+</div>
+<!-- EDUCATION -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Education
+</h3>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<input
+type="text"
+id="college"
+placeholder="College Name"
+class="input">
+
+<input
+type="text"
+id="degree"
+placeholder="Degree"
+class="input">
+
+<input
+type="text"
+id="cgpa"
+placeholder="CGPA"
+class="input">
+
+<input
+type="text"
+id="year"
+placeholder="Passing Year"
+class="input">
+
+</div>
+
+</div>
+
+<!-- SKILLS -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Technical Skills
+</h3>
+
+<textarea
+id="skills"
+rows="4"
+placeholder="Java, Python, SQL, Machine Learning..."
+class="textarea"></textarea>
+
+</div>
+
+<!-- EXPERIENCE -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Experience
+</h3>
+
+<textarea
+id="experience"
+rows="4"
+placeholder="Internships, Freelancing, Work Experience..."
+class="textarea"></textarea>
+
+</div>
+
+<!-- PROJECTS -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Projects
+</h3>
+
+<textarea
+id="projects"
+rows="5"
+placeholder="Project Name + Technologies + Description"
+class="textarea"></textarea>
+
+</div>
+<div class="mb-8">
+
+<h2 class="section-title">
+ATS Keyword Analyzer
+</h2>
+
+<textarea
+id="jobDescription"
+rows="5"
+class="textarea"
+placeholder="Paste Job Description Here">
+</textarea>
+
+<button
+onclick="analyzeKeywords()"
+class="bg-green-600 text-white px-5 py-2 rounded-xl mt-3">
+
+Analyze ATS Match
+
+</button>
+
+</div>
+
+<!-- CERTIFICATIONS -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Certifications
+</h3>
+
+<textarea
+id="certifications"
+rows="3"
+placeholder="AWS, Coursera, NPTEL, Udemy..."
+class="textarea"></textarea>
+
+</div>
+
+<!-- ACHIEVEMENTS -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Achievements
+</h3>
+
+<textarea
+id="achievements"
+rows="3"
+placeholder="Hackathons, Coding Competitions, Awards..."
+class="textarea"></textarea>
+
+</div>
+
+<!-- LANGUAGES -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Languages
+</h3>
+
+<input
+type="text"
+id="languages"
+placeholder="English, Hindi..."
+class="input">
+
+</div>
+
+<!-- INTERESTS -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Interests
+</h3>
+
+<input
+type="text"
+id="interests"
+placeholder="AI, Web Development, Data Science..."
+class="input">
+
+</div>
+
+<!-- AI SUMMARY -->
+
+<div class="mb-8">
+
+<div class="flex justify-between items-center mb-4">
+
+<h3 class="section-title !mb-0">
+Professional Summary
+</h3>
+
+<button
+onclick="generateSummary()"
+class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+<div class="mb-8">
+
+<h2 class="section-title">
+Cover Letter Generator
+</h2>
+
+<textarea
+id="coverLetter"
+rows="8"
+class="textarea"
+placeholder="Generated Cover Letter">
+</textarea>
+
+<button
+onclick="generateCoverLetter()"
+class="bg-indigo-600 text-white px-5 py-2 rounded-xl mt-3">
+Generate Cover Letter
+</button>
+
+</div>
+
+Generate AI Summary
+
+</button>
+
+</div>
+
+<textarea
+id="summary"
+rows="6"
+placeholder="AI generated summary will appear here..."
+class="textarea"></textarea>
+
+</div>
+
+<!-- PROFILE PHOTO -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Profile Photo
+</h3>
+
+<input
+type="file"
+id="imageUpload"
+class="input">
+
+</div>
+
+<!-- TEMPLATE SECTION -->
+
+<div class="mb-8">
+
+<h3 class="section-title">
+Resume Templates
+</h3>
+
+<div class="flex flex-wrap gap-3">
+
+<button
+onclick="changeTemplate('modern')"
+class="bg-blue-600 text-white px-4 py-2 rounded-xl">
+
+Modern
+
+</button>
+
+<button
+onclick="changeTemplate('corporate')"
+class="bg-gray-800 text-white px-4 py-2 rounded-xl">
+
+Corporate
+
+</button>
+
+<button
+onclick="changeTemplate('creative')"
+class="bg-pink-600 text-white px-4 py-2 rounded-xl">
+
+Creative
+
+</button>
+
+<button
+onclick="changeTemplate('minimal')"
+class="bg-green-600 text-white px-4 py-2 rounded-xl">
+
+Minimal
+
+</button>
+
+<button
+onclick="changeTemplate('executive')"
+class="bg-purple-700 text-white px-4 py-2 rounded-xl">
+
+Executive
+
+</button>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="flex flex-wrap gap-4">
+
+<button
+onclick="downloadPDF()"
+class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-xl">
+
+<i class="fa-solid fa-download"></i>
+
+Download PDF
+
+</button>
+
+<button
+onclick="toggleDarkMode()"
+class="bg-black text-white px-6 py-3 rounded-xl shadow-xl">
+
+<i class="fa-solid fa-moon"></i>
+
+Dark Mode
+
+</button>
+
+</div>
+
+</div>
+
+<!-- RIGHT SIDE RESUME -->
+
+<div
+id="resume"
+class="bg-white p-10 rounded-3xl shadow-2xl">
+
+<!-- ATS SCORE -->
+
+<div class="mb-8">
+
+<div class="flex justify-between mb-2">
+
+<span class="font-bold">
+ATS Score
+</span>
+
+<span id="strengthText">
+20%
+</span>
+
+</div>
+
+<div class="w-full bg-gray-300 rounded-full h-4">
+
+<div
+id="strengthBar"
+class="bg-green-500 h-4 rounded-full"
+style="width:20%">
+</div>
+
+</div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div class="text-center mb-8">
+
+<img
+id="previewImage"
+src="https://via.placeholder.com/150"
+class="w-36 h-36 rounded-full mx-auto border-4 border-blue-600 object-cover mb-4">
+
+<h1
+id="previewName"
+class="text-5xl font-bold text-blue-700">
+
+Your Name
+
+</h1>
+
+<p id="previewEmail">Email</p>
+
+<p id="previewPhone">Phone</p>
+
+<p id="previewLocation">Location</p>
+
+<p id="previewLinkedin">LinkedIn</p>
+
+<p id="previewGithub">GitHub</p>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Professional Summary
+</h2>
+
+<p id="previewSummary">
+Professional summary...
+</p>
+
+</div>
+<!-- EDUCATION -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Education
+</h2>
+
+<p id="previewEducation">
+Education Details
+</p>
+
+</div>
+
+<!-- SKILLS -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Technical Skills
+</h2>
+
+<p id="previewSkills">
+Skills
+</p>
+
+</div>
+
+<!-- EXPERIENCE -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Experience
+</h2>
+
+<p id="previewExperience">
+Experience
+</p>
+
+</div>
+
+<!-- PROJECTS -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Projects
+</h2>
+
+<p id="previewProjects">
+Projects
+</p>
+
+</div>
+
+<!-- CERTIFICATIONS -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Certifications
+</h2>
+
+<p id="previewCertifications">
+Certifications
+</p>
+
+</div>
+
+<!-- ACHIEVEMENTS -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Achievements
+</h2>
+
+<p id="previewAchievements">
+Achievements
+</p>
+
+</div>
+
+<!-- LANGUAGES -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Languages
+</h2>
+
+<p id="previewLanguages">
+Languages
+</p>
+
+</div>
+
+<!-- INTERESTS -->
+
+<div class="mb-6">
+
+<h2 class="section-title">
+Interests
+</h2>
+
+<p id="previewInterests">
+Interests
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- AI CHATBOT -->
+
+<div
+id="chatbotButton"
+onclick="toggleChatbot()"
+class="fixed bottom-6 right-6 bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl cursor-pointer z-50">
+
+<i class="fa-solid fa-robot text-2xl"></i>
+
+</div>
+
+<div
+id="chatbotContainer"
+class="hidden fixed bottom-24 right-6 w-96 bg-white rounded-3xl shadow-2xl z-50 overflow-hidden">
+
+<div
+class="bg-blue-600 text-white p-4 flex justify-between items-center">
+
+<h3 class="font-bold">
+AI Resume Assistant
+</h3>
+
+<button onclick="toggleChatbot()">
+✕
+</button>
+
+</div>
+
+<div
+id="chatMessages"
+class="h-80 overflow-y-auto p-4 space-y-3">
+
+<div
+class="bg-gray-100 p-3 rounded-xl">
+
+Hello 👋
+
+I can help you with:
+
+<ul class="list-disc ml-5 mt-2">
+
+<li>Resume Review</li>
+<li>Project Suggestions</li>
+<li>Career Objective</li>
+<li>Skill Recommendations</li>
+<li>ATS Improvements</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="p-4 border-t">
+
+<div class="flex gap-2">
+
+<input
+type="text"
+id="chatInput"
+placeholder="Ask anything..."
+class="input flex-1">
+
+<button
+onclick="sendMessage()"
+class="bg-blue-600 text-white px-4 rounded-xl">
+
+Send
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer
+class="bg-gray-900 text-white mt-20">
+
+<div
+class="max-w-7xl mx-auto px-8 py-10 text-center">
+
+<h3
+class="text-2xl font-bold mb-3">
+
+AI Resume Builder
+
+</h3>
+
+<p
+class="text-gray-400">
+
+Build professional resumes with Artificial Intelligence.
+
+</p>
+
+<p
+class="mt-4 text-gray-500">
+
+Created by Akarshan Agarwal © 2026
+
+</p>
+
+</div>
+
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
